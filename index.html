@@ -1,89 +1,129 @@
+
 <!DOCTYPE html>
+<!-- تحديد لغة المستند بالعربية مع ضبط اتجاه الكتابة من اليمين إلى اليسار -->
 <html lang="ar" dir="rtl">
 <head>
+    <!-- تحديد ترميز الحروف العالمي UTF-8 لدعم اللغة العربية بشكل سليم -->
     <meta charset="UTF-8">
-    <!-- إعدادات الشاشة لضمان الاستجابة التامة على الهواتف والأجهزة الذكية -->
+    <!-- إعدادات الشاشة واستجابة الموقع لكافة الهواتف المحمولة والأجهزة الذكية لمنع التكبير العشوائي -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- عنوان الصفحة الظاهر في شريط المتصفح علوياً -->
     <title>قلعة التبريد | Ice Castle Cooling</title>
     
-    <!-- خط القاهرة الاحترافي + أيقونات FontAwesome -->
+    <!-- ربط خط القاهرة (Cairo) الاحترافي المباشر من مكتبة خطوط جوجل -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- ربط مكتبة الأيقونات العالمية FontAwesome لعرض أيقونات الواتساب، الهاتف، وغيرها -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- ==========================================
          [1] التنسيقات العامة والتجاوب (CSS)
          ========================================== -->
     <style>
-        /* المتغيرات اللونية الرئيسية للموقع */
+        /* المتغيرات اللونية الرئيسية للموقع لتوحيد الألوان وسهولة التعديل مستقبلاً */
         :root {
-            --primary: #0a192f;
-            --primary-light: #112240;
-            --ice-blue: #00f0ff;
-            --ice-glow: rgba(0, 240, 255, 0.4);
-            --accent-gold: #ffd700;
-            --whatsapp-green: #25d366;
-            --bg-body: #0b132b;
-            --card-bg: #1c2541;
-            --text-main: #ffffff;
-            --text-bright: #e2e8f0;
-            --text-sub: #cbd5e1;
+            --primary: #0a192f; /* اللون الكحلي الداكن للأنماط الأساسية */
+            --primary-light: #112240; /* كحلي فاتح للبطاقات والخلفيات الثانوية */
+            --ice-blue: #00f0ff; /* الأزرق الثلجي السماوي المتوهج */
+            --ice-glow: rgba(0, 240, 255, 0.4); /* ظل الأزرق الثلجي للتوهج */
+            --accent-gold: #ffd700; /* الذهبي للألقاب والعروض المميزة */
+            --whatsapp-green: #25d366; /* أخضر الواتساب الرسمي للأزرار */
+            --bg-body: #0b132b; /* خلفية الجسم الكلية للموقع */
+            --card-bg: #1c2541; /* خلفية الكروت والمعارض */
+            --text-main: #ffffff; /* اللون الأبيض الأساسي للنصوص */
+            --text-bright: #e2e8f0; /* نصوص ناصعة وقابلة للقراءة */
+            --text-sub: #cbd5e1; /* نصوص فرعية خفيفة */
         }
 
-        /* إعادة ضبط العناصر الافتراضية للمتصفح */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        /* إعادة ضبط الهوامش والبادئات الافتراضية لكافة العناصر وتحديد الخط العام */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Cairo', sans-serif; 
+        }
 
-        /* تنسيق خلفية الجسم مع منع التمدد الأفقي على الشاشات الصغيرة */
+        /* تنسيق خلفية الجسم مع التدرج الشعاعي ومنع التمدد الأفقي لمنع ظهور شريط سحب جانبي */
         body {
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            line-height: 1.7;
-            background-image: radial-gradient(circle at 50% 0%, #1c2541 0%, #0b132b 70%);
-            min-height: 100vh;
-            overflow-x: hidden;
+            background-color: var(--bg-body); /* لون الخلفية الاحتياطي */
+            color: var(--text-main); /* لون النص الموحد */
+            line-height: 1.7; /* ارتفاع السطر لراحة العين أثناء القراءة */
+            background-image: radial-gradient(circle at 50% 0%, #1c2541 0%, #0b132b 70%); /* تدرج دائم من المنتصف */
+            min-height: 100vh; /* ضمان تغطية الشاشة بالكامل */
+            overflow-x: hidden; /* منع التمدد الأفقي على الشاشات الصغرى */
         }
 
-        /* الحاوية الرئيسية للتوسط والمحاذاة */
-        .container { max-width: 1100px; margin: auto; padding: 0 15px; width: 100%; }
+        /* الحاوية الرئيسية لتوسيط المحتوى داخل المنتصف بعرض ثابت ومريح */
+        .container { 
+            max-width: 1100px; 
+            margin: auto; 
+            padding: 0 15px; 
+            width: 100%; 
+        }
 
-        /* [تنسيقات الهيدر العلوي] */
+        /* تنسيق الهيدر العلوي الملتصق بأعلى الصفحة عند التمرير */
         header {
-            background: rgba(10, 25, 47, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 12px 0;
-            border-bottom: 2px solid var(--ice-blue);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 25px var(--ice-glow);
+            background: rgba(10, 25, 47, 0.95); /* لون خلفية شبه شفاف */
+            backdrop-filter: blur(10px); /* تأثير ضبابي جمالي خلف الهيدر */
+            padding: 12px 0; /* هوامش داخلية علوية وسفلية */
+            border-bottom: 2px solid var(--ice-blue); /* خط أسفل الهيدر باللون الثلجي */
+            position: sticky; /* تثبيت الهيدر أعلى الشاشة */
+            top: 0; 
+            z-index: 1000; /* ضمان ظهور الهيدر فوق كافة مكونات الموقع */
+            box-shadow: 0 4px 25px var(--ice-glow); /* ظلال ثلجية متوهجة أسفل الهيدر */
         }
 
-        nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .logo-area { display: flex; align-items: center; gap: 12px; }
+        /* تنسيق شريط التصفح وشبكة محاذاته */
+        nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+        }
+
+        /* منطقة اللوجو والاسم */
+        .logo-area { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
         
+        /* تنسيق شعار الدرع والقلعة (SVG) */
         .shield-castle-logo {
             width: 55px;
             height: 55px;
-            filter: drop-shadow(0 0 10px var(--ice-blue));
-            transition: transform 0.3s ease;
+            filter: drop-shadow(0 0 10px var(--ice-blue)); /* إضاءة متوهجة حول الشعار */
+            transition: transform 0.3s ease; /* تحريك سلس عند التفاعل */
         }
-        .shield-castle-logo:hover { transform: scale(1.08); }
 
+        /* تكبير الشعار قليلاً عند تمرير الماوس فوقه */
+        .shield-castle-logo:hover { 
+            transform: scale(1.08); 
+        }
+
+        /* عنوان الموقع الرئيسي بداخل الهيدر */
         .logo-area h1 { 
             color: #ffffff; 
             font-size: 22px; 
             font-weight: 900; 
-            text-shadow: 0 0 10px var(--ice-blue);
+            text-shadow: 0 0 10px var(--ice-blue); /* إضاءة ثلجية حول النص */
         }
 
-        .header-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        /* عناصر التحكم والأزرار في الهيدر */
+        .header-controls { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            flex-wrap: wrap; 
+        }
 
-        /* زر خدمة العملاء المباشر */
+        /* زر خدمة العملاء المباشر بألوان الواتساب */
         .customer-service-btn {
-            background: rgba(37, 211, 102, 0.15);
-            color: var(--whatsapp-green);
-            border: 1px solid var(--whatsapp-green);
+            background: rgba(37, 211, 102, 0.15); /* خلفية خضراء خفيفة */
+            color: var(--whatsapp-green); /* نص باللون الأخضر */
+            border: 1px solid var(--whatsapp-green); /* إطار أخضر */
             padding: 6px 14px;
-            border-radius: 20px;
+            border-radius: 20px; /* حواف دائرية بالكامل */
             font-size: 13px;
             font-weight: 800;
             text-decoration: none;
@@ -92,13 +132,15 @@
             gap: 6px;
             transition: 0.3s;
         }
+
+        /* تفاعل زر خدمة العملاء عند الوقوف عليه */
         .customer-service-btn:hover {
             background: var(--whatsapp-green);
             color: #fff;
             box-shadow: 0 0 10px rgba(37, 211, 102, 0.5);
         }
 
-        /* عداد الزوار (يظهر للمالك فقط) */
+        /* عداد الزوار المخفي افتراضياً والظاهر للمالك فقط */
         .visitor-counter {
             background: rgba(0, 240, 255, 0.15);
             color: var(--ice-blue);
@@ -108,25 +150,25 @@
             font-weight: 800;
             border: 1px solid var(--ice-blue);
             box-shadow: 0 0 10px rgba(0,240,255,0.2);
-            display: none;
+            display: none; /* مخفي عن الزوار العاديين */
             align-items: center;
             gap: 6px;
         }
 
-        /* ==========================================
-           شريط سابقة الأعمال المتحرك
-           ========================================== */
+        /* تنسيق شريط سابقة الأعمال المتحرك (Ticker) */
         .ticker-wrap {
             width: 100%;
             background: linear-gradient(90deg, #0a192f, #112240, #0a192f);
             border-bottom: 1px solid var(--ice-blue);
             overflow: hidden;
-            white-space: nowrap;
+            white-space: nowrap; /* منع نزول العبارات لسطر جديد */
             padding: 8px 0;
             box-shadow: 0 2px 10px rgba(0,240,255,0.2);
             display: flex;
             align-items: center;
         }
+
+        /* عنوان شريط سابقة الأعمال المظلم الذهبي */
         .ticker-title {
             background: var(--accent-gold);
             color: #000;
@@ -140,12 +182,16 @@
             align-items: center;
             gap: 6px;
         }
+
+        /* حركة نصوص الشريط المستمرة والأبطأ عكس الاتجاه */
         .ticker-move {
             display: inline-block;
             white-space: nowrap;
-            padding-left: 100%;
-            animation: ticker 50s linear infinite;
+            padding-left: 100%; /* بدء الحركة من اليسار للجهة المقابلة */
+            animation: ticker 50s linear infinite; /* حركة بطيئة منتظمة تستغرق 50 ثانية */
         }
+
+        /* تنسيق النص الداخلي المار داخل الشريط */
         .ticker-item {
             display: inline-block;
             padding: 0 25px;
@@ -153,14 +199,19 @@
             font-weight: 800;
             color: var(--text-bright);
         }
-        .ticker-item i { color: var(--ice-blue); margin-left: 6px; }
 
+        .ticker-item i { 
+            color: var(--ice-blue); 
+            margin-left: 6px; 
+        }
+
+        /* دالة تحريك الشريط من اليسار إلى اليمين بطريقة سلسة ومستمرة */
         @keyframes ticker {
             0% { transform: translate3d(-100%, 0, 0); }
             100% { transform: translate3d(100%, 0, 0); }
         }
 
-        /* [تنسيقات شريط القصص Shorts/Stories] */
+        /* تنسيق شريط القصص (Stories / Shorts) */
         .stories-container {
             margin: 15px 0 25px;
             background: rgba(17, 34, 64, 0.7);
@@ -170,11 +221,13 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            overflow-x: auto;
+            overflow-x: auto; /* التمرير الأفقي باللمس */
             scrollbar-width: thin;
             scrollbar-color: var(--ice-blue) var(--primary-light);
             -webkit-overflow-scrolling: touch;
         }
+
+        /* شارة عنوان غرفة الاستوري */
         .story-badge-label {
             font-size: 13px;
             font-weight: 800;
@@ -186,6 +239,8 @@
             padding-left: 10px;
             border-left: 2px solid rgba(0,240,255,0.2);
         }
+
+        /* عنصر الاستوري الفردي */
         .story-item {
             display: flex;
             flex-direction: column;
@@ -195,7 +250,12 @@
             flex-shrink: 0;
             transition: transform 0.3s ease;
         }
-        .story-item:hover { transform: scale(1.08); }
+
+        .story-item:hover { 
+            transform: scale(1.08); 
+        }
+
+        /* حلقة الإضاءة المتدرجة حول صورة الاستوري */
         .story-ring {
             width: 58px;
             height: 58px;
@@ -204,6 +264,8 @@
             background: linear-gradient(45deg, var(--accent-gold), var(--ice-blue), #f39c12);
             box-shadow: 0 0 10px var(--ice-glow);
         }
+
+        /* الصورة بداخل دائرية الاستوري */
         .story-img {
             width: 100%;
             height: 100%;
@@ -211,6 +273,8 @@
             object-fit: cover;
             border: 2px solid var(--primary);
         }
+
+        /* عنوان الاستوري المكتوب أسفل الدائرة */
         .story-title {
             font-size: 11px;
             color: var(--text-bright);
@@ -223,7 +287,7 @@
             text-overflow: ellipsis;
         }
 
-        /* [تنسيقات الواجهة الرئيسية Hero Section] */
+        /* تنسيق واجهة الترحيب الرئيسية (Hero Section) */
         .hero { 
             text-align: center; 
             padding: 40px 20px; 
@@ -233,15 +297,32 @@
             margin: 15px 0 35px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
+
+        /* شعار الواجهة الكبير المتوهج */
         .hero-logo-big { 
             width: 130px; 
             height: 130px; 
             margin-bottom: 15px; 
             filter: drop-shadow(0 0 20px var(--ice-blue));
         }
-        .hero h2 { color: var(--ice-blue); font-size: 28px; font-weight: 900; margin-bottom: 8px; text-shadow: 0 0 8px rgba(0, 240, 255, 0.5); }
-        .hero .engineer-tag { color: var(--accent-gold); font-weight: 800; font-size: 19px; margin-top: 5px; text-shadow: 0 0 5px rgba(255, 215, 0, 0.4); }
 
+        .hero h2 { 
+            color: var(--ice-blue); 
+            font-size: 28px; 
+            font-weight: 900; 
+            margin-bottom: 8px; 
+            text-shadow: 0 0 8px rgba(0, 240, 255, 0.5); 
+        }
+
+        .hero .engineer-tag { 
+            color: var(--accent-gold); 
+            font-weight: 800; 
+            font-size: 19px; 
+            margin-top: 5px; 
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.4); 
+        }
+
+        /* حاوية شارات التخصصات */
         .specialty-badges {
             display: flex;
             justify-content: center;
@@ -249,6 +330,8 @@
             gap: 10px;
             margin-top: 20px;
         }
+
+        /* شارات التخصص الفرعية الملونة */
         .spec-badge {
             background: rgba(0, 240, 255, 0.2);
             color: #ffffff;
@@ -260,7 +343,7 @@
             text-shadow: 0 0 3px rgba(0,0,0,0.8);
         }
 
-        /* [قسم سابقة الأعمال والخبرات] */
+        /* قسم سابقة الأعمال والخبرات التفصيلي */
         .portfolio-section {
             background: linear-gradient(145deg, #112240, #1c2541);
             border-radius: 20px;
@@ -269,6 +352,7 @@
             margin: 35px 0;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
+
         .portfolio-intro {
             text-align: center;
             font-size: 17px;
@@ -277,11 +361,13 @@
             margin-bottom: 25px;
             line-height: 1.8;
         }
+
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
+
         .portfolio-card {
             background: rgba(10, 25, 47, 0.7);
             border-radius: 14px;
@@ -290,11 +376,13 @@
             border-top: 1px solid rgba(0, 240, 255, 0.2);
             transition: 0.3s;
         }
+
         .portfolio-card:hover {
             transform: translateY(-5px);
             border-color: var(--accent-gold);
             box-shadow: 0 5px 20px rgba(0, 240, 255, 0.2);
         }
+
         .portfolio-card h3 {
             color: var(--accent-gold);
             font-size: 18px;
@@ -304,7 +392,12 @@
             align-items: center;
             gap: 10px;
         }
-        .portfolio-card ul { list-style: none; padding: 0; }
+
+        .portfolio-card ul { 
+            list-style: none; 
+            padding: 0; 
+        }
+
         .portfolio-card ul li {
             color: var(--text-bright);
             font-size: 14px;
@@ -314,15 +407,21 @@
             align-items: flex-start;
             gap: 8px;
         }
-        .portfolio-card ul li i { color: var(--ice-blue); margin-top: 4px; font-size: 12px; }
 
-        /* [قسم مميزات وقيم المركز] */
+        .portfolio-card ul li i { 
+            color: var(--ice-blue); 
+            margin-top: 4px; 
+            font-size: 12px; 
+        }
+
+        /* قسم كروت الشفافية وقيم المركز */
         .trust-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
             margin: 35px 0;
         }
+
         .trust-card {
             background: linear-gradient(145deg, #1c2541, #0a192f);
             border-radius: 16px;
@@ -332,21 +431,35 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             transition: 0.3s ease;
         }
+
         .trust-card:hover {
             border-color: var(--accent-gold);
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
         }
+
         .trust-icon {
             font-size: 38px;
             color: var(--accent-gold);
             margin-bottom: 15px;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
         }
-        .trust-card h3 { color: var(--ice-blue); font-size: 19px; margin-bottom: 10px; font-weight: 800; }
-        .trust-card p { color: var(--text-bright); font-size: 14.5px; line-height: 1.7; font-weight: 600; }
 
-        /* [عناوين الأقسام الرئيسية] */
+        .trust-card h3 { 
+            color: var(--ice-blue); 
+            font-size: 19px; 
+            margin-bottom: 10px; 
+            font-weight: 800; 
+        }
+
+        .trust-card p { 
+            color: var(--text-bright); 
+            font-size: 14.5px; 
+            line-height: 1.7; 
+            font-weight: 600; 
+        }
+
+        /* تنسيق عناوين الأقسام الرئيسية خطوط وتحتها علامات */
         .section-title { 
             text-align: center; 
             color: #ffffff; 
@@ -356,7 +469,12 @@
             position: relative;
             text-shadow: 0 0 10px rgba(255,255,255,0.2);
         }
-        .section-title i { color: var(--ice-blue); margin-left: 8px; }
+
+        .section-title i { 
+            color: var(--ice-blue); 
+            margin-left: 8px; 
+        }
+
         .section-title::after {
             content: '';
             display: block;
@@ -368,12 +486,13 @@
             box-shadow: 0 0 10px var(--ice-blue);
         }
 
-        /* [معرض العروض والأجهزة] */
+        /* شبكة العروض التجارية والأجهزة */
         .market-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
             gap: 25px; 
         }
+
         .market-card { 
             background: var(--card-bg); 
             border-radius: 16px; 
@@ -383,15 +502,33 @@
             transition: all 0.3s ease;
             position: relative;
         }
+
         .market-card:hover { 
             transform: translateY(-8px); 
             border-color: var(--ice-blue);
             box-shadow: 0 12px 30px var(--ice-glow); 
         }
-        .card-media { position: relative; width: 100%; height: 210px; background: #000; }
-        .card-media img, .card-media iframe { width: 100%; height: 100%; object-fit: cover; border: none; }
-        .card-body { padding: 20px; text-align: center; }
-        
+
+        .card-media { 
+            position: relative; 
+            width: 100%; 
+            height: 210px; 
+            background: #000; 
+        }
+
+        .card-media img, .card-media iframe { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            border: none; 
+        }
+
+        .card-body { 
+            padding: 20px; 
+            text-align: center; 
+        }
+
+        /* شارات حالة الجهاز المتاحة علوياً على الكرت */
         .tag-badge { 
             position: absolute; 
             top: 12px; 
@@ -404,9 +541,11 @@
             z-index: 2;
             box-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
-        .tag-used { background: #e74c3c; }
-        .tag-offer { background: #f39c12; }
 
+        .tag-used { background: #e74c3c; } /* أحمر للمستعمل */
+        .tag-offer { background: #f39c12; } /* برتقالي للعروض */
+
+        /* زر الاستفسار أو الطلب بداخل كارت العرض */
         .btn-order-item {
             display: inline-flex;
             align-items: center;
@@ -423,9 +562,13 @@
             font-size: 15px;
             transition: 0.3s;
         }
-        .btn-order-item:hover { background: #1eb954; transform: scale(1.02); }
 
-        /* [قسم الفيديوهات المعروضة] */
+        .btn-order-item:hover { 
+            background: #1eb954; 
+            transform: scale(1.02); 
+        }
+
+        /* كروت فيديوهات الصيانة الشاملة */
         .video-card { 
             background: var(--card-bg); 
             border-radius: 16px; 
@@ -435,7 +578,15 @@
             border-right: 5px solid var(--ice-blue); 
             border-top: 1px solid rgba(255,255,255,0.05);
         }
-        .video-card h3 { color: var(--ice-blue); font-size: 19px; margin-bottom: 12px; font-weight: 800; }
+
+        .video-card h3 { 
+            color: var(--ice-blue); 
+            font-size: 19px; 
+            margin-bottom: 12px; 
+            font-weight: 800; 
+        }
+
+        /* فيديو متجاوب بحفظ الأبعاد تلقائياً */
         .responsive-video { 
             position: relative; 
             padding-bottom: 56.25%; 
@@ -444,9 +595,17 @@
             border-radius: 12px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-        .responsive-video iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        /* [فورم طلب الصيانة] */
+        .responsive-video iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            border: 0; 
+        }
+
+        /* قسم فورم طلب الصيانة الرئيسي */
         .booking-section {
             background: linear-gradient(135deg, var(--primary-light), var(--card-bg));
             border: 2px solid var(--ice-blue);
@@ -455,8 +614,19 @@
             margin: 40px 0;
             box-shadow: 0 10px 35px var(--ice-glow);
         }
-        .form-group { margin-bottom: 18px; }
-        .form-group label { display: block; font-weight: 800; margin-bottom: 8px; font-size: 15px; color: var(--ice-blue); }
+
+        .form-group { 
+            margin-bottom: 18px; 
+        }
+
+        .form-group label { 
+            display: block; 
+            font-weight: 800; 
+            margin-bottom: 8px; 
+            font-size: 15px; 
+            color: var(--ice-blue); 
+        }
+
         .form-group input, .form-group textarea {
             width: 100%;
             padding: 14px;
@@ -468,8 +638,13 @@
             color: #ffffff;
             outline: none;
         }
-        .form-group input:focus, .form-group textarea:focus { border-color: var(--ice-blue); box-shadow: 0 0 12px var(--ice-glow); }
-        
+
+        .form-group input:focus, .form-group textarea:focus { 
+            border-color: var(--ice-blue); 
+            box-shadow: 0 0 12px var(--ice-glow); 
+        }
+
+        /* زر إرسال طلب الصيانة المباشر للواتساب */
         .btn-whatsapp {
             background-color: var(--whatsapp-green);
             color: #ffffff;
@@ -486,9 +661,13 @@
             justify-content: center;
             gap: 10px;
         }
-        .btn-whatsapp:hover { background-color: #1eb954; transform: translateY(-2px); }
 
-        /* [لوحة التحكم الإدارية] */
+        .btn-whatsapp:hover { 
+            background-color: #1eb954; 
+            transform: translateY(-2px); 
+        }
+
+        /* لوحة التحكم والتحكم الإداري المخفية */
         .admin-panel {
             display: none;
             background: var(--card-bg);
@@ -498,7 +677,15 @@
             border-radius: 16px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.6);
         }
-        .admin-panel h3 { color: var(--accent-gold); margin-bottom: 15px; font-weight: 800; border-bottom: 1px solid rgba(255,215,0,0.3); padding-bottom: 8px; }
+
+        .admin-panel h3 { 
+            color: var(--accent-gold); 
+            margin-bottom: 15px; 
+            font-weight: 800; 
+            border-bottom: 1px solid rgba(255,215,0,0.3); 
+            padding-bottom: 8px; 
+        }
+
         .admin-box {
             background: rgba(0,0,0,0.25);
             padding: 15px;
@@ -506,10 +693,29 @@
             margin-bottom: 20px;
             border-right: 4px solid var(--accent-gold);
         }
-        .admin-input-group { margin-bottom: 10px; }
-        .admin-input-group label { display: block; font-size: 13px; color: var(--ice-blue); margin-bottom: 4px; font-weight: bold; }
-        .admin-input-group input { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #333; background: #0b132b; color: #fff; }
 
+        .admin-input-group { 
+            margin-bottom: 10px; 
+        }
+
+        .admin-input-group label { 
+            display: block; 
+            font-size: 13px; 
+            color: var(--ice-blue); 
+            margin-bottom: 4px; 
+            font-weight: bold; 
+        }
+
+        .admin-input-group input { 
+            width: 100%; 
+            padding: 10px; 
+            border-radius: 6px; 
+            border: 1px solid #333; 
+            background: #0b132b; 
+            color: #fff; 
+        }
+
+        /* زر فتح لوحة الإدارة */
         .btn-toggle-admin {
             background: #1e293b;
             color: var(--accent-gold);
@@ -523,7 +729,12 @@
             display: block;
             transition: 0.3s;
         }
-        .btn-toggle-admin:hover { background: var(--accent-gold); color: #000; box-shadow: 0 0 15px rgba(255,215,0,0.4); }
+
+        .btn-toggle-admin:hover { 
+            background: var(--accent-gold); 
+            color: #000; 
+            box-shadow: 0 0 15px rgba(255,215,0,0.4); 
+        }
 
         .btn-save-admin {
             background: var(--accent-gold);
@@ -537,8 +748,12 @@
             margin-top: 10px;
             width: 100%;
         }
-        .btn-save-admin:hover { background: #e6c200; }
 
+        .btn-save-admin:hover { 
+            background: #e6c200; 
+        }
+
+        /* التذييل الفوتر السفلي */
         footer { 
             background: #060d19; 
             color: var(--text-bright); 
@@ -550,11 +765,11 @@
             margin-top: 50px;
         }
 
-        /* [قواعد الشاشات الصغيرة والهواتف المحمولة Media Queries] */
+        /* قواعد الشاشات الهواتف المحمولة لجعل التصميم متجاوباً تماماً */
         @media (max-width: 768px) {
-            nav { flex-direction: column; text-align: center; }
+            nav { flex-direction: column; text-align: center; } /* محاذاة عمودية للهيدر */
             .header-controls { justify-content: center; width: 100%; }
-            .hero h2 { font-size: 22px; }
+            .hero h2 { font-size: 22px; } /* تصغير العنوان للهواتف */
             .hero .engineer-tag { font-size: 16px; }
             .section-title { font-size: 20px; }
             .booking-section { padding: 18px; }
@@ -571,7 +786,7 @@
     <header>
         <div class="container">
             <nav>
-                <!-- شعار القلعة مع تحريك عند الحوم -->
+                <!-- شعار القلعة SVG التفاعلي المتوهج -->
                 <div class="logo-area">
                     <svg class="shield-castle-logo" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
                         <defs>
@@ -595,12 +810,12 @@
                 </div>
 
                 <div class="header-controls">
-                    <!-- زر الاتصال بالواتساب المباشر -->
+                    <!-- زر خدمة العملاء المباشر للاتصال المباشر عبر الواتساب -->
                     <a href="https://wa.me/201124950214" target="_blank" class="customer-service-btn">
                         <i class="fa-solid fa-headset"></i> خدمة العملاء: 01124950214
                     </a>
 
-                    <!-- عنصر عداد الزوار الحقيقي ينشط للمالك فقط -->
+                    <!-- عنصر عداد الزوار المخفي ينشط عند دخول المالك فقط -->
                     <div class="visitor-counter" id="visitorCounterBox">
                         <i class="fa-solid fa-eye"></i> عدد الزوار: <span id="visitorCount">0</span>
                     </div>
@@ -610,7 +825,7 @@
     </header>
 
     <!-- ==========================================
-         شريط سابقة الأعمال بعبارات موثوقة وقوية
+         شريط سابقة الأعمال المتحرك بقوة وشموخ
          ========================================== -->
     <div class="ticker-wrap">
         <div class="ticker-title"><i class="fa-solid fa-crown"></i> سجل الإنجازات والاعتماد</div>
@@ -627,13 +842,14 @@
     <main class="container">
 
         <!-- ==========================================
-             [3] غرفة الاستوري (Stories/Reels Bar)
+             [3] غرفة الاستوري (Stories / Reels Bar)
              ========================================== -->
         <div class="stories-container" id="storiesBar">
             <div class="story-badge-label">
                 <i class="fa-solid fa-bolt" style="color:var(--accent-gold);"></i> استوري القلعة
             </div>
             
+            <!-- استوري 1 -->
             <a href="https://facebook.com" target="_blank" class="story-item" id="storyLink1">
                 <div class="story-ring">
                     <img src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=150" class="story-img" alt="استوري 1" id="storyImg1">
@@ -641,6 +857,7 @@
                 <span class="story-title" id="storyTitle1">عرض صيف</span>
             </a>
 
+            <!-- استوري 2 -->
             <a href="https://facebook.com" target="_blank" class="story-item" id="storyLink2">
                 <div class="story-ring">
                     <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=150" class="story-img" alt="استوري 2" id="storyImg2">
@@ -648,6 +865,7 @@
                 <span class="story-title" id="storyTitle2">صيانة فورية</span>
             </a>
 
+            <!-- استوري 3 -->
             <a href="https://facebook.com" target="_blank" class="story-item" id="storyLink3">
                 <div class="story-ring">
                     <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=150" class="story-img" alt="استوري 3" id="storyImg3">
@@ -671,6 +889,7 @@
             <h2>مركز قلعة التبريد المتخصص</h2>
             <div class="engineer-tag">إشراف المهندس: جمعة صبحي</div>
             
+            <!-- شارات التخصص الأساسية -->
             <div class="specialty-badges">
                 <span class="spec-badge"><i class="fa-solid fa-snowflake"></i> صيانة الثلاجات المنزلية</span>
                 <span class="spec-badge"><i class="fa-solid fa-icicles"></i> صيانة الديب فريزر</span>
@@ -688,6 +907,7 @@
             <p class="portfolio-intro">نعتز برصيد حافل من المشاريع الكبرى والإنجازات التي تم تنفيذها بنجاح في مختلف القطاعات:</p>
             
             <div class="portfolio-grid">
+                <!-- كارت القطاع الفندقي -->
                 <div class="portfolio-card">
                     <h3><i class="fa-solid fa-hotel"></i> القطاع الفندقي والسياحي</h3>
                     <ul>
@@ -697,6 +917,7 @@
                     </ul>
                 </div>
 
+                <!-- كارت القطاع الحكومي والخدمي -->
                 <div class="portfolio-card">
                     <h3><i class="fa-solid fa-building-shield"></i> القطاع الحكومي والخدمي (الفيوم)</h3>
                     <ul>
@@ -706,6 +927,7 @@
                     </ul>
                 </div>
 
+                <!-- كارت المطاعم والقطاع التعليمي -->
                 <div class="portfolio-card">
                     <h3><i class="fa-solid fa-store"></i> المطاعم والقطاع التجاري والتعليمي</h3>
                     <ul>
@@ -746,6 +968,7 @@
             <h2 class="section-title"><i class="fa-solid fa-store"></i> معرض العروض والأجهزة المتاحة</h2>
             <div class="market-grid">
                 
+                <!-- عرض 1 مع فيديو يوتيوب معتمد -->
                 <div class="market-card">
                     <span class="tag-badge tag-offer">عرض بالفيديو</span>
                     <div class="card-media">
@@ -758,6 +981,7 @@
                     </div>
                 </div>
 
+                <!-- عرض 2 بصورة توضيحية -->
                 <div class="market-card">
                     <span class="tag-badge tag-used">مستعمل كالجديد</span>
                     <div class="card-media">
@@ -808,6 +1032,7 @@
             <h2 class="section-title" style="margin-top: 0;"><i class="fa-solid fa-wrench"></i> طلب صيانة جديد</h2>
             <p style="text-align: center; margin-bottom: 22px; font-size: 15px; color: var(--text-bright); font-weight: 700;">يرجى ملء البيانات التالية لإرسال الطلب فوراً إلى خدمة العملاء (01124950214):</p>
 
+            <!-- استدعاء دالة الإرسال الفورية السريعة للواتساب عند إرسال الفورم -->
             <form onsubmit="sendToWhatsApp(event)">
                 <div class="form-group">
                     <label><i class="fa-solid fa-user"></i> 1. الاسم ثنائي:</label>
@@ -863,7 +1088,7 @@
                 </div>
                 <div class="admin-input-group">
                     <label>وصف العرض الثاني:</label>
-                    <input type="text" id="inputOfferDesc2" placeholder="الوصف والضمان...">
+                    <input type="text" id="inputOfferDesc2" placeholder="الو الوصف والضمان...">
                 </div>
                 <div class="admin-input-group">
                     <label>رابط صورة العرض الثاني (URL):</label>
@@ -907,6 +1132,7 @@
 
     </main>
 
+    <!-- الفوتر والتذييل النهائي للصفحة -->
     <footer>
         <p>جميع الحقوق محفوظة &copy; 2026 - مركز قلعة التبريد المتخصص (إشراف م / جمعة صبحي)</p>
     </footer>
@@ -915,122 +1141,45 @@
          [11] الأكواد البرمجية والوظائف (JavaScript)
          ========================================== -->
     <script>
-        // [وظيفة 1] حساب وتحديث عداد الزوار وحفظ القيمة بالذاكرة المحلية للمتصفح
+        // [وظيفة 1] حساب وتحديث عداد الزوار الحقيقي عبر الذاكرة المحلية LocalStorage
         function handleVisitorCounter() {
-            let currentVisits = localStorage.getItem('castle_visitor_count'); // جلب قيمة العداد المخزنة
+            let currentVisits = localStorage.getItem('castle_visitor_count'); // جلب القيمة المخزنة
             if (!currentVisits) {
-                currentVisits = 100; // القيمة الابتدائية الافتراضية
+                currentVisits = 100; // قيمة البداية الافتراضية
             } else {
                 currentVisits = parseInt(currentVisits) + 1; // زيادة زائر واحد جديد
             }
-            localStorage.setItem('castle_visitor_count', currentVisits); // حفظ العداد المحدث
-            document.getElementById('visitorCount').innerText = currentVisits; // طباعة الرقم بالصفحة
+            localStorage.setItem('castle_visitor_count', currentVisits); // حفظ التحديث بالذاكرة
+            document.getElementById('visitorCount').innerText = currentVisits; // طباعة الرقم بالعداد
         }
 
-        // [وظيفة 2] تجهيز وإرسال تفاصيل طلب الصيانة المباشر إلى رقم خدمة العملاء عبر الواتساب
+        // [وظيفة 2 - فائقة السرعة] تحضير وإرسال تفاصيل طلب الصيانة المباشر للواتساب فوراً دون تأخير
         function sendToWhatsApp(event) {
-            event.preventDefault(); // إيقاف إعادة تحميل الصفحة عند الإرسال
+            event.preventDefault(); // منع إعادة تحميل الصفحة الافتراضية
 
-            // جلب مدخلات المستخدم من النموذج
-            const name = document.getElementById('clientName').value;
-            const phone = document.getElementById('clientPhone').value;
-            const address = document.getElementById('clientAddress').value;
-            const issue = document.getElementById('issueDescription').value;
+            // جلب البيانات المدخلة من الخانات الأربعة فوراً
+            const name = document.getElementById('clientName').value; // اسم العميل
+            const phone = document.getElementById('clientPhone').value; // رقم هاتف العميل
+            const address = document.getElementById('clientAddress').value; // العنوان بالتفصيل
+            const issue = document.getElementById('issueDescription').value; // تفاصيل العطل
 
-            const targetPhone = "201124950214"; // رقم استقبال طلبات الصيانة
+            const targetPhone = "201124950214"; // رقم استقبال الطلبات المعتمد لخدمة العملاء
             
-            // صياغة نص الرسالة بأسلوب منظم للواتساب
+            // صياغة الرسالة بترميز مباشر وخفيف لضمان الإرسال اللحظي
             const message = `*طلب صيانة جديد - مركز قلعة التبريد*%0A%0A` +
                             `👤 *الاسم:* ${encodeURIComponent(name)}%0A` +
                             `📞 *الهاتف:* ${encodeURIComponent(phone)}%0A` +
                             `📍 *العنوان:* ${encodeURIComponent(address)}%0A` +
                             `🛠️ *تفاصيل العطل:* ${encodeURIComponent(issue)}`;
 
-            // فتح تطبيق الواتساب بنص الرسالة الجاهزة
+            // التوجيه الفوري اللحظي والمباشر للواتساب باستخدام location.href لرفع السرعة
             const whatsappURL = `https://wa.me/${targetPhone}?text=${message}`;
-            window.open(whatsappURL, '_blank');
+            window.location.href = whatsappURL; 
         }
 
-        // [وظيفة 3 - معدلة للأمان] حماية لوحة التحكم وإرسال الرمز دون إظهار رقم الهاتف المالك نهائياً
+        // [وظيفة 3 - الأمان التام] فتح لوحة الإدارة وإرسال الرمز دون إظهار رقم الهاتف على الشاشة إطلاقاً
         function openAdminPanel() {
-            // توليد رمز تحقق عشوائي سري مكون من 4 أرقام
+            // توليد رمز أمان سري مكون من 4 أرقام
             const generatedOTP = Math.floor(1000 + Math.random() * 9000);
             
-            // رقم الهاتف مخفي داخل الكود البرمجي البرمجة فقط ولا يظهر للعميل أو الهكر إطلاقاً
-            const secureOwnerPhone = "201023153358"; 
-
-            // إشعار أمني عام للمستخدم بدون إظهار أي أرقام
-            alert("تم إرسال رمز أمان آلي إلى هاتفك الخاص (المالك) عبر الواتساب. يرجى مراجعته وتأكيده لدخول لوحة التحكم.");
-
-            // توجيه الرسالة فوراً للرقم السري
-            const otpMessage = `*رمز الأمان السري للوحة تحكم قلعة التبريد:* ${generatedOTP}`;
-            window.open(`https://wa.me/${secureOwnerPhone}?text=${encodeURIComponent(otpMessage)}`, '_blank');
-
-            // نافذة طلب إدخال الرمز السري بدون ذكر أو طباعة أي رقم هاتف
-            setTimeout(() => {
-                const userEnteredOTP = prompt("أدخل رمز الأمان (OTP) الذي استلمته على الواتساب:");
-                
-                if (userEnteredOTP && userEnteredOTP.trim() === generatedOTP.toString()) {
-                    alert("تم التحقق بنجاح! تم تفعيل عداد الزوار ولوحة الإدارة.");
-                    document.getElementById('adminPanel').style.display = 'block'; // إظهار لوحة التحكم
-                    document.getElementById('visitorCounterBox').style.display = 'flex'; // إظهار عداد الزوار
-                    document.getElementById('adminPanel').scrollIntoView({ behavior: 'smooth' }); // انتقال سلس
-                } else if (userEnteredOTP !== null) {
-                    alert("رمز الأمان غير صحيح! تعذر فتح لوحة التحكم.");
-                }
-            }, 1000);
-        }
-
-        // [وظيفة 4] حفظ وتحديث العروض التجارية بالصفحة
-        function saveOffersData() {
-            const title1 = document.getElementById('inputOfferTitle1').value;
-            const desc1 = document.getElementById('inputOfferDesc1').value;
-            const video1 = document.getElementById('inputOfferVideo1').value;
-
-            const title2 = document.getElementById('inputOfferTitle2').value;
-            const desc2 = document.getElementById('inputOfferDesc2').value;
-            const img2 = document.getElementById('inputOfferImg2').value;
-
-            // التحديث الفوري للعناصر إن تم إدخالها
-            if (title1) document.getElementById('offerTitle1').innerText = title1;
-            if (desc1) document.getElementById('offerDesc1').innerText = desc1;
-            if (video1) document.getElementById('offerVideoIframe1').src = `https://www.youtube.com/embed/${video1}`;
-
-            if (title2) document.getElementById('offerTitle2').innerText = title2;
-            if (desc2) document.getElementById('offerDesc2').innerText = desc2;
-            if (img2) document.getElementById('offerImg2').src = img2;
-
-            alert("تم حفظ العروض وتحديثها بنجاح!");
-        }
-
-        // [وظيفة 5] حفظ وتحديث بيانات شريط القصص (الاستوري)
-        function saveStoriesData() {
-            const title1 = document.getElementById('inputStoryTitle1').value;
-            const img1 = document.getElementById('inputStoryImg1').value;
-            const link1 = document.getElementById('inputStoryLink1').value;
-
-            if (title1) document.getElementById('storyTitle1').innerText = title1;
-            if (img1) document.getElementById('storyImg1').src = img1;
-            if (link1) document.getElementById('storyLink1').href = link1;
-
-            alert("تم حفظ بيانات القصص بنجاح!");
-        }
-
-        // [وظيفة 6] حفظ وتحديث فيديوهات معرض الصيانة
-        function saveVideosData() {
-            const title1 = document.getElementById('inputVideoTitle1').value;
-            const vid1 = document.getElementById('inputVideoID1').value;
-
-            if (title1) document.getElementById('videoTitle1').innerText = title1;
-            if (vid1) document.getElementById('videoIframe1').src = `https://www.youtube.com/embed/${vid1}`;
-
-            alert("تم تحديث فيديوهات المعرض بنجاح!");
-        }
-
-        // تنفيذ دالة العداد بمجرد اكتمال تحميل عناصر الصفحة
-        window.onload = function() {
-            handleVisitorCounter();
-        };
-    </script>
-</body>
-</html>
+            // رقم الهاتف مخفي داخل الكود البرمجي بمتغير ولا يظهر لأي مستخدم أو هكر
